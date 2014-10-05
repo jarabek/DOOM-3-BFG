@@ -80,8 +80,8 @@
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Retail|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Retail|Win32'" />
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(VCInstallDir)PlatformSDK\include;$(ProjectDir)dxsdk_June2010\include;$(IncludePath)</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(VCInstallDir)PlatformSDK\lib;$(ProjectDir)dxsdk_June2010\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(PUREWEB_LIBS)\C++\VS2010\include;$(VCInstallDir)PlatformSDK\include;$(ProjectDir)dxsdk_June2010\include;$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(PUREWEB_LIBS)\C++\VS2010\lib;$(VCInstallDir)PlatformSDK\lib;$(ProjectDir)dxsdk_June2010\lib\x86;$(LibraryPath)</LibraryPath>
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(VCInstallDir)PlatformSDK\lib;$(ProjectDir)dxsdk_June2010\lib\x86;$(LibraryPath)</LibraryPath>
     <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(VCInstallDir)PlatformSDK\include;$(ProjectDir)dxsdk_June2010\include;$(IncludePath)</IncludePath>
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Retail|Win32'">$(VCInstallDir)PlatformSDK\lib;$(ProjectDir)dxsdk_June2010\lib\x86;$(LibraryPath)</LibraryPath>
@@ -101,8 +101,9 @@
     <ClCompile />
     <ClCompile />
     <ClCompile>
-      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</TreatWarningAsError>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(DXSDK_DIR)\Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
     </ClCompile>
     <ClCompile>
       <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</TreatWarningAsError>

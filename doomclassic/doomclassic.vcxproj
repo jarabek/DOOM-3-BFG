@@ -188,7 +188,8 @@
     <IncludePath>$(VCInstallDir)PlatformSDK\include;$(ProjectDir)\..\neo\dxsdk_June2010\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(VCInstallDir)PlatformSDK\include;$(ProjectDir)\..\neo\dxsdk_June2010\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(PUREWEB_LIBS)\C++\VS2010\include;$(VCInstallDir)PlatformSDK\include;$(ProjectDir)\..\neo\dxsdk_June2010\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(PUREWEB_LIBS)\C++\VS2010\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

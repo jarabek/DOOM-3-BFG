@@ -28,7 +28,6 @@ If you have questions concerning this license or the applicable additional terms
 
 #ifndef __COMMON_H__
 #define __COMMON_H__
-
 /*
 ==============================================================
 
@@ -36,6 +35,14 @@ If you have questions concerning this license or the applicable additional terms
 
 ==============================================================
 */
+
+#include "CSI\PureWeb\StateManager\StateManager.h"
+
+// a counted pointer to the state manager
+//CSI::CountedPtr<CSI::PureWeb::Server::StateManagerServer> m_pServer;
+
+// the state manager itself
+//CSI::CountedPtr<CSI::PureWeb::Server::StateManager> m_pStateManager;
 
 extern idCVar com_engineHz;
 extern float com_engineHz_latched;

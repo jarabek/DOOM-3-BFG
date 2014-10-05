@@ -1208,6 +1208,10 @@ void idCommonLocal::Init( int argc, const char * const * argv, const char *cmdli
 				}
 			}
 		}
+		//CSI::Library::Initialize();
+		//CSI::Threading::UiDispatcher::InitMessageThread();    // this thread is the UI thread
+
+		//Initialize PureWeb State Manager Server
 
 		Printf( "--- Common Initialization Complete ---\n" );
 
