@@ -82,7 +82,11 @@
     <ClCompile>
       <TreatWarningAsError>false</TreatWarningAsError>
       <WarningLevel>Level3</WarningLevel>
+      <AdditionalOptions>/Zm206 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
+    <CustomBuildStep>
+      <Command>-Zm206</Command>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
