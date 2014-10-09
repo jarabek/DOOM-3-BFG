@@ -1212,7 +1212,7 @@ void idCommonLocal::Init( int argc, const char * const * argv, const char *cmdli
 
 		//Initialize PureWeb State Manager Server
 		m_pServer = new CSI::PureWeb::Server::StateManagerServer();
-		m_pStateManager = new CSI::PureWeb::Server::StateManager("D3");
+		m_pStateManager = new CSI::PureWeb::Server::StateManager("d3");
 		m_pServer->Start(m_pStateManager.get());
 
 		Printf( "--- Common Initialization Complete ---\n" );
