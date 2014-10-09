@@ -36,7 +36,7 @@ If you have questions concerning this license or the applicable additional terms
 ==============================================================
 */
 
-#include "CSI\PureWeb\StateManager\StateManager.h"
+#include "pureweb.h"
 
 // a counted pointer to the state manager
 //CSI::CountedPtr<CSI::PureWeb::Server::StateManagerServer> m_pServer;
