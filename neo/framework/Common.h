@@ -172,7 +172,18 @@ enum currentGame_t {
 };
 
 class idCommon {
+
 public:
+	// a counted pointer to the state manager
+    CSI::CountedPtr<CSI::PureWeb::Server::StateManagerServer> m_pServer;
+
+    // the state manager itself
+    CSI::CountedPtr<CSI::PureWeb::Server::StateManager> m_pStateManager;
+	static CSI::PureWeb::Server::StateManager& StateManager()
+    {
+        return *CSI::PureWeb::Server::StateManager::Instance();
+    }
+    
 	virtual						~idCommon() {}
 
 								// Initialize everything.

@@ -35,7 +35,6 @@ If you have questions concerning this license or the applicable additional terms
 #include "../renderer/AutoRenderBink.h"
 
 #include "../sound/sound.h"
-
 #include "../../doomclassic/doom/doomlib.h"
 #include "../../doomclassic/doom/d_event.h"
 #include "../../doomclassic/doom/d_main.h"
@@ -1208,10 +1207,13 @@ void idCommonLocal::Init( int argc, const char * const * argv, const char *cmdli
 				}
 			}
 		}
-		//CSI::Library::Initialize();
-		//CSI::Threading::UiDispatcher::InitMessageThread();    // this thread is the UI thread
+		CSI::Library::Initialize();
+		CSI::Threading::UiDispatcher::InitMessageThread();    // this thread is the UI thread
 
 		//Initialize PureWeb State Manager Server
+		m_pServer = new CSI::PureWeb::Server::StateManagerServer();
+		m_pStateManager = new CSI::PureWeb::Server::StateManager("D3");
+		m_pServer->Start(m_pStateManager.get());
 
 		Printf( "--- Common Initialization Complete ---\n" );
 
@@ -1227,6 +1229,16 @@ idCommonLocal::Shutdown
 =================
 */
 void idCommonLocal::Shutdown() {
+
+	// make sure server stops
+    m_pServer->Stop(CSI::TimeSpan::FromMilliseconds(250));
+
+	// release server and state manager objects before uninitializing CSI library
+    m_pServer = NULL;
+    m_pStateManager = NULL;
+
+    // Uninitialize CSI / PureWeb libraries
+    CSI::Library::Uninitialize();
 
 	if ( com_shuttingDown ) {
 		return;
