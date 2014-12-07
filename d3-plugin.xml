@@ -20,6 +20,7 @@
     <property name="arguments">
       <list>
         <value>/PureWeb</value>
+		<value>r_fullscreen 0</value>
       </list>
     </property>
   </bean>

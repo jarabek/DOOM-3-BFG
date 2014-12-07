@@ -35,6 +35,11 @@ If you have questions concerning this license or the applicable additional terms
 #include "../../doomclassic/doom/doomlib.h"
 #include "../../doomclassic/doom/globaldata.h"
 
+using namespace CSI;
+using namespace CSI::PureWeb;
+using namespace CSI::PureWeb::Server;
+
+
 /*
 
 New for tech4x:
@@ -316,7 +321,7 @@ void idCommonLocal::UpdateScreen( bool captureToImage ) {
 
 	// get the GPU busy with new commands
 	renderSystem->RenderCommandBuffers( cmd );
-
+	
 	insideUpdateScreen = false;
 }
 /*
@@ -745,4 +750,42 @@ void idCommonLocal::RunDoomClassicFrame() {
 
 	renderSystem->UploadImage( "_doomClassic", doomClassicImageData.Ptr(), DOOMCLASSIC_RENDERWIDTH, DOOMCLASSIC_RENDERHEIGHT );
 	doomTics++;
+}
+
+/*
+=============
+PureWeb::IRenderedView
+=============
+*/
+void idCommonLocal::SetClientSize(Size clientSize){
+}
+
+Size idCommonLocal::GetActualSize(){
+	float sysWidth = renderSystem->GetWidth();
+	float sysHeight = renderSystem->GetHeight();		
+    return Size(sysWidth, sysHeight);
+}
+
+void idCommonLocal::RenderView(PureWeb::Server::RenderTarget target){
+	int sysWidth = renderSystem->GetWidth();
+	int sysHeight = renderSystem->GetHeight();	
+	Image image = target.RenderTargetImage();	
+	byte *buf = renderSystem->GetScreenBuffer(sysWidth, sysHeight, NULL);
+	const int pix = sysWidth * sysHeight;
+	const int bufferSize = pix * 3 + 18;
+
+	CSI::Byte* csipBuff = buf;		
+	CSI::Array<CSI::Byte> csiBuff(bufferSize);
+	csiBuff.CopyFrom(csipBuff, bufferSize);
+		
+	ByteArray::Copy(&csiBuff, image.ImageBytes(), 0, bufferSize);
+
+	//ByteArray::Copy(csiBuff, image.ImageBytes(), 0, image.ImageBytes().Count());			
+}
+
+void idCommonLocal::PostKeyEvent(const Ui::PureWebKeyboardEventArgs& keyEvent){
+
+}
+
+void idCommonLocal::PostMouseEvent(const Ui::PureWebMouseEventArgs& mouseEvent){
 }

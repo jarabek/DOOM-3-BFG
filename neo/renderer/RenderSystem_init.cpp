@@ -1243,6 +1243,42 @@ void idRenderSystemLocal::TakeScreenshot( int width, int height, const char *fil
 	takingScreenshot = false;
 }
 
+byte* idRenderSystemLocal::GetScreenBuffer( int width, int height, renderView_t *ref ){
+	byte		*buffer;
+	int			i, j, c, temp;
+
+	takingScreenshot = true;
+
+	const int pix = width * height;
+	const int bufferSize = pix * 3 + 18;
+
+	buffer = (byte *)R_StaticAlloc( bufferSize );
+	memset( buffer, 0, bufferSize );
+
+	R_ReadTiledPixels( width, height, buffer + 18, ref );
+	
+	// fill in the header (this is vertically flipped, which qglReadPixels emits)
+	buffer[2] = 2;		// uncompressed type
+	buffer[12] = width & 255;
+	buffer[13] = width >> 8;
+	buffer[14] = height & 255;
+	buffer[15] = height >> 8;
+	buffer[16] = 24;	// pixel size
+
+	// swap rgb to bgr
+	c = 18 + width * height * 3;
+	for (i=18 ; i<c ; i+=3) {
+		temp = buffer[i];
+		buffer[i] = buffer[i+2];
+		buffer[i+2] = temp;
+	}	
+
+	R_StaticFree( buffer );
+
+	takingScreenshot = false;
+	return buffer;
+}
+
 /* 
 ================== 
 R_ScreenshotFilename

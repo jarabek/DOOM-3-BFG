@@ -113,7 +113,7 @@ struct frameTiming_t {
 #define SAVEGAME_DESCRIPTION_FILENAME		"gamedata.txt"
 #define SAVEGAME_STRINGS_FILENAME			"gamedata.strings"
 
-class idCommonLocal : public idCommon {
+class idCommonLocal : public idCommon, public CSI::PureWeb::Server::IRenderedView {
 public:
 								idCommonLocal();
 
@@ -214,6 +214,14 @@ public:
 	int		GetRendererShadowsMicroseconds() const { return time_shadows; }
 	int		GetRendererIdleMicroseconds() const { return mainFrameTiming.startRenderTime - mainFrameTiming.finishSyncTime; }
 	int		GetRendererGPUMicroseconds() const { return time_gpu; }
+	
+	
+	// PureWeb::IRenderedView
+    void SetClientSize(CSI::PureWeb::Size clientSize);
+    CSI::PureWeb::Size GetActualSize();
+    void RenderView(CSI::PureWeb::Server::RenderTarget target);
+    void PostKeyEvent(const CSI::PureWeb::Ui::PureWebKeyboardEventArgs& keyEvent);
+    void PostMouseEvent(const CSI::PureWeb::Ui::PureWebMouseEventArgs& mouseEvent);
 
 	frameTiming_t		frameTiming;
 	frameTiming_t		mainFrameTiming;
